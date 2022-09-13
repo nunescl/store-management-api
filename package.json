@@ -20,7 +20,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "test:staged": "jest --findRelatedTests --passWithNoTests",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "migration:generate": "npm run build && npx ts-node ./node_modules/typeorm/cli migration:generate -d ./src/config/data-source.provider.ts ./src/config/migrations/${npm_config_name}",
+    "migration:run": "npm run build && npx ts-node ./node_modules/typeorm/cli migration:run -d ./src/config/data-source.provider.ts"
   },
   "dependencies": {
     "@commitlint/cli": "^17.1.2",
