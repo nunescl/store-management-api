@@ -10,4 +10,5 @@ export const dataSource = new DataSource({
   database: 'postgres',
   entities: [__dirname + '/../**/**/*.entity{.ts,.js}'],
   migrations: [join(__dirname, '/migrations/*{.ts,.js}')],
+  // namingStrategy:
 });
