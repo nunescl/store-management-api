@@ -1,6 +1,6 @@
-import { UserRoleEnum } from 'src/shared/user-role.enum';
+import { UserRoleEnum } from 'src/user/entities/user-role.enum';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { UserAdressEntity } from './user-adress.entity';
+import { UserAddressEntity } from './user-address.entity';
 import { UserContactEntity } from './user-contact.entity';
 
 @Entity()
@@ -20,9 +20,9 @@ export class UserEntity {
   @Column()
   store_id?: string;
 
-  @OneToMany(() => UserContactEntity, (contact) => contact.user_id)
+  @OneToMany(() => UserContactEntity, (contact) => contact.user_id, {})
   contacts: UserContactEntity[];
 
-  @OneToMany(() => UserAdressEntity, (adress) => adress.user_id)
-  adress: UserAdressEntity[];
+  @OneToMany(() => UserAddressEntity, (address) => address.user_id)
+  address: UserAddressEntity[];
 }

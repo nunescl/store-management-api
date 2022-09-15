@@ -2,12 +2,21 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 import { UserEntity } from './user.entity';
 
 @Entity()
-export class UserAdressEntity {
+export class UserAddressEntity {
   @Column()
-  email: string;
+  state: string;
 
   @Column()
-  phone_number: string;
+  city: string;
+
+  @Column()
+  neighborhood: string;
+
+  @Column()
+  street: string;
+
+  @Column()
+  build_number: string;
 
   @Column()
   isMain: boolean;

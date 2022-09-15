@@ -4,19 +4,10 @@ import { UserEntity } from './user.entity';
 @Entity()
 export class UserContactEntity {
   @Column()
-  province: string;
+  email: string;
 
   @Column()
-  city: string;
-
-  @Column()
-  neighborhood: string;
-
-  @Column()
-  street: string;
-
-  @Column()
-  build_number: string;
+  phone_number: string;
 
   @Column()
   isMain: boolean;
