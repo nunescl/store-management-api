@@ -2,7 +2,7 @@ import { Body, Controller, Post } from '@nestjs/common';
 import { SigninUserService } from 'src/user/usecases/signin-user.usecase';
 import { AuthCredentialsDto } from '../dtos/auth-credentials.dto';
 
-@Controller('')
+@Controller('user')
 export class CreateUserController {
   constructor(private signinUserService: SigninUserService) {}
 
