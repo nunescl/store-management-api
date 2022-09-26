@@ -3,7 +3,7 @@ import { SigninUserService } from 'src/user/usecases/signin-user.usecase';
 import { AuthCredentialsDto } from '../dtos/auth-credentials.dto';
 
 @Controller('user')
-export class CreateUserController {
+export class SigninUserController {
   constructor(private signinUserService: SigninUserService) {}
 
   @Post('/signin')
