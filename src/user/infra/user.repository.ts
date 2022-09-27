@@ -3,7 +3,6 @@ import { DataSource, Repository } from 'typeorm';
 import { UserAddressEntity } from '../entities/user-address.entity';
 import { UserContactEntity } from '../entities/user-contact.entity';
 import { UserEntity } from '../entities/user.entity';
-import { CreateUserContactDto } from '../presentation/dtos/create-user-contact.dto';
 import {
   SaveUser,
   SaveUserAdress,
@@ -18,26 +17,67 @@ export class UsersRepository {
 
   constructor(private dataSource: DataSource) {
     this.userRepo = dataSource.getRepository(UserEntity);
+    this.contactRepo = dataSource.getRepository(UserContactEntity);
+    this.addressRepo = dataSource.getRepository(UserAddressEntity);
   }
 
   public async createUser(user: SaveUser) {
     await this.userRepo.save(user);
   }
 
-  public async createUserContact(userContact: SaveUserContact) {
-    const { contact_type, contact_field, is_main, user_id } = userContact;
-    const contact = this.contactRepo.create({
-      contact_type,
-      contact_field,
-      is_main,
-      user_id,
-    });
-    await this.contactRepo.save(contact);
-    return contact;
+  public async createUserContact(
+    userContact: SaveUserContact,
+  ): Promise<SaveUserContact> {
+    try {
+      await this.contactRepo.save({
+        ...userContact,
+        user: { id: userContact.user_id },
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+
+    return userContact;
   }
 
-  public async createUserAddress(userAddress: SaveUserAdress) {
-    await this.addressRepo.save(userAddress);
+  public async findUserContacts(
+    user: UserEntity,
+  ): Promise<UserContactEntity[]> {
+    const query = this.contactRepo.createQueryBuilder('contacts');
+    query.where({ user });
+
+    try {
+      const contacts = await query.getMany();
+      return contacts;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  public async createUserAddress(
+    userAddress: SaveUserAdress,
+  ): Promise<SaveUserAdress> {
+    try {
+      await this.addressRepo.save({
+        ...userAddress,
+        user: { id: userAddress.user_id },
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+    return userAddress;
+  }
+
+  public async findUserAddress(user: UserEntity): Promise<UserAddressEntity[]> {
+    const query = this.addressRepo.createQueryBuilder('address');
+    query.where({ user });
+
+    try {
+      const address = await query.getMany();
+      return address;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   public async findUser(username: string) {
