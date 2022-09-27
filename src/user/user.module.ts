@@ -13,6 +13,8 @@ import { CreateUserAddressController } from './presentation/controllers/create-u
 import { CreateUserAddressService } from './usecases/create-user-address.usecase';
 import { GetUserContactsController } from './presentation/controllers/get-user-contacts.controller';
 import { GetUserContactsService } from './usecases/get-user-contacts.usecase';
+import { GetUserAddressController } from './presentation/controllers/get-user-address.controller';
+import { GetUserAddressService } from './usecases/get-user-address.usecase';
 
 @Module({
   imports: [
@@ -31,6 +33,7 @@ import { GetUserContactsService } from './usecases/get-user-contacts.usecase';
     CreateUserContactController,
     CreateUserAddressController,
     GetUserContactsController,
+    GetUserAddressController,
   ],
   providers: [
     CreateUserService,
@@ -38,6 +41,7 @@ import { GetUserContactsService } from './usecases/get-user-contacts.usecase';
     CreateUserContactService,
     CreateUserAddressService,
     GetUserContactsService,
+    GetUserAddressService,
     UsersRepository,
   ],
 })

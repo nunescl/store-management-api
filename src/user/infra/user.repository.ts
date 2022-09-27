@@ -68,6 +68,18 @@ export class UsersRepository {
     return userAddress;
   }
 
+  public async findUserAddress(user: UserEntity): Promise<UserAddressEntity[]> {
+    const query = this.addressRepo.createQueryBuilder('address');
+    query.where({ user });
+
+    try {
+      const address = await query.getMany();
+      return address;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   public async findUser(username: string) {
     const user = await this.userRepo.findOne({ where: { username } });
     return user;
