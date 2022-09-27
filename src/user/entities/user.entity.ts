@@ -17,7 +17,7 @@ export class UserEntity {
   @Column()
   role: UserRoleEnum;
 
-  @Column()
+  @Column({ nullable: true })
   store_id?: string;
 
   @OneToMany(() => UserContactEntity, (contact) => contact.user_id, {})
