@@ -20,9 +20,9 @@ export class UserEntity {
   @Column({ nullable: true })
   store_id?: string;
 
-  @OneToMany(() => UserContactEntity, (contact) => contact.user_id, {})
+  @OneToMany(() => UserContactEntity, (contact) => contact.user.id, {})
   contacts: UserContactEntity[];
 
-  @OneToMany(() => UserAddressEntity, (address) => address.user_id)
-  address: UserAddressEntity[];
+  // @OneToMany(() => UserAddressEntity, (address) => address.user_id)
+  // address: UserAddressEntity[];
 }

@@ -1,3 +1,4 @@
+import { UserContactEntity } from 'src/user/entities/user-contact.entity';
 import { UserRoleEnum } from 'src/user/entities/user-role.enum';
 
 export class CreateUserDto {
@@ -5,6 +6,5 @@ export class CreateUserDto {
   password: string;
   role: UserRoleEnum;
   store_id?: string;
-  contacts: [];
-  address: [];
+  contacts: UserContactEntity[];
 }
