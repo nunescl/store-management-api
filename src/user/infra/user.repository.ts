@@ -40,6 +40,20 @@ export class UsersRepository {
     return userContact;
   }
 
+  public async findUserContacts(
+    user: UserEntity,
+  ): Promise<UserContactEntity[]> {
+    const query = this.contactRepo.createQueryBuilder('contacts');
+    query.where({ user });
+
+    try {
+      const contacts = await query.getMany();
+      return contacts;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   public async createUserAddress(
     userAddress: SaveUserAdress,
   ): Promise<SaveUserAdress> {
