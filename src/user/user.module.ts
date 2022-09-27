@@ -9,6 +9,8 @@ import { SigninUserService } from './usecases/signin-user.usecase';
 import { SigninUserController } from './presentation/controllers/signin-user.controller';
 import { CreateUserContactService } from './usecases/create-user-contact.usecase';
 import { CreateUserContactController } from './presentation/controllers/create-user-contact.controller';
+import { CreateUserAddressController } from './presentation/controllers/create-user-address.controller';
+import { CreateUserAddressService } from './usecases/create-user-address.usecase';
 
 @Module({
   imports: [
@@ -25,11 +27,13 @@ import { CreateUserContactController } from './presentation/controllers/create-u
     CreateUserController,
     SigninUserController,
     CreateUserContactController,
+    CreateUserAddressController,
   ],
   providers: [
     CreateUserService,
     SigninUserService,
     CreateUserContactService,
+    CreateUserAddressService,
     UsersRepository,
   ],
 })

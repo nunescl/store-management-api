@@ -3,7 +3,11 @@ import { DataSource, Repository } from 'typeorm';
 import { UserAddressEntity } from '../entities/user-address.entity';
 import { UserContactEntity } from '../entities/user-contact.entity';
 import { UserEntity } from '../entities/user.entity';
-import { SaveUser, SaveUserContact } from './user.repository.types';
+import {
+  SaveUser,
+  SaveUserAdress,
+  SaveUserContact,
+} from './user.repository.types';
 
 @Injectable()
 export class UsersRepository {
@@ -14,6 +18,7 @@ export class UsersRepository {
   constructor(private dataSource: DataSource) {
     this.userRepo = dataSource.getRepository(UserEntity);
     this.contactRepo = dataSource.getRepository(UserContactEntity);
+    this.addressRepo = dataSource.getRepository(UserAddressEntity);
   }
 
   public async createUser(user: SaveUser) {
@@ -23,8 +28,6 @@ export class UsersRepository {
   public async createUserContact(
     userContact: SaveUserContact,
   ): Promise<SaveUserContact> {
-    console.log(userContact);
-
     try {
       await this.contactRepo.save({
         ...userContact,
@@ -35,6 +38,20 @@ export class UsersRepository {
     }
 
     return userContact;
+  }
+
+  public async createUserAddress(
+    userAddress: SaveUserAdress,
+  ): Promise<SaveUserAdress> {
+    try {
+      await this.addressRepo.save({
+        ...userAddress,
+        user: { id: userAddress.user_id },
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+    return userAddress;
   }
 
   public async findUser(username: string) {

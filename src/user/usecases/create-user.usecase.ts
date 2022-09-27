@@ -7,7 +7,7 @@ import * as bcrypt from 'bcrypt';
 export class CreateUserService {
   constructor(private usersRepository: UsersRepository) {}
   async createUser(createUserDto: CreateUserDto): Promise<void> {
-    const { username, password, role, contacts } = createUserDto;
+    const { username, password, role, contacts, address } = createUserDto;
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -17,6 +17,7 @@ export class CreateUserService {
         password: hashedPassword,
         role,
         contacts,
+        address,
       });
     } catch (error) {
       throw new Error();

@@ -23,6 +23,6 @@ export class UserEntity {
   @OneToMany(() => UserContactEntity, (contact) => contact.user.id, {})
   contacts: UserContactEntity[];
 
-  // @OneToMany(() => UserAddressEntity, (address) => address.user_id)
-  // address: UserAddressEntity[];
+  @OneToMany(() => UserAddressEntity, (address) => address.user.id, {})
+  address: UserAddressEntity[];
 }

@@ -1,8 +1,17 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { UserEntity } from './user.entity';
 
 @Entity()
 export class UserAddressEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
   @Column()
   state: string;
 
@@ -19,8 +28,9 @@ export class UserAddressEntity {
   build_number: string;
 
   @Column()
-  isMain: boolean;
+  is_main: boolean;
 
   @ManyToOne(() => UserEntity, (user) => user.id)
-  user_id: string;
+  @JoinColumn({ name: 'user_id' })
+  user: UserEntity;
 }
