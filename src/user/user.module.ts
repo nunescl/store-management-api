@@ -7,6 +7,8 @@ import { CreateUserController } from './presentation/controllers/create-user.con
 import { CreateUserService } from './usecases/create-user.usecase';
 import { SigninUserService } from './usecases/signin-user.usecase';
 import { SigninUserController } from './presentation/controllers/signin-user.controller';
+import { CreateUserContactService } from './usecases/create-user-contact.usecase';
+import { CreateUserContactController } from './presentation/controllers/create-user-contact.controller';
 
 @Module({
   imports: [
@@ -19,7 +21,16 @@ import { SigninUserController } from './presentation/controllers/signin-user.con
     }),
     TypeOrmModule.forFeature([UsersRepository]),
   ],
-  controllers: [CreateUserController, SigninUserController],
-  providers: [CreateUserService, SigninUserService, UsersRepository],
+  controllers: [
+    CreateUserController,
+    SigninUserController,
+    CreateUserContactController,
+  ],
+  providers: [
+    CreateUserService,
+    SigninUserService,
+    CreateUserContactService,
+    UsersRepository,
+  ],
 })
 export class UserModule {}
