@@ -1,17 +1,28 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { UserContactEnum } from './user-contact.enum';
 import { UserEntity } from './user.entity';
 
 @Entity()
 export class UserContactEntity {
-  @Column()
-  email: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
-  phone_number: string;
+  contact_type: UserContactEnum;
 
   @Column()
-  isMain: boolean;
+  contact_field: string;
+
+  @Column()
+  is_main: boolean;
 
   @ManyToOne(() => UserEntity, (user) => user.id)
-  user_id: string;
+  @JoinColumn({ name: 'user_id' })
+  user: UserEntity;
 }
