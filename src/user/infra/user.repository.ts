@@ -25,6 +25,13 @@ export class UsersRepository {
     await this.userRepo.save(user);
   }
 
+  public async findUser(username: string) {
+    const user = await this.userRepo.findOne({ where: { username } });
+    return user;
+  }
+
+  //contacts
+
   public async createUserContact(
     userContact: SaveUserContact,
   ): Promise<SaveUserContact> {
@@ -41,7 +48,7 @@ export class UsersRepository {
   }
 
   public async findUserContacts(
-    user: UserEntity,
+    user: Partial<UserEntity>,
   ): Promise<UserContactEntity[]> {
     const query = this.contactRepo.createQueryBuilder('contacts');
     query.where({ user });
@@ -53,6 +60,24 @@ export class UsersRepository {
       throw new Error(error);
     }
   }
+
+  public async updateMainContact(userId: string, contact: string) {
+    const allUserContacts = await this.findUserContacts({
+      id: userId,
+    });
+    const promises = allUserContacts.map(async (userContact) => {
+      userContact.is_main = false;
+      if (userContact.id === contact) {
+        userContact.is_main = true;
+      }
+      return this.contactRepo.update(userContact.id, userContact);
+    });
+
+    await Promise.all(promises);
+    return allUserContacts;
+  }
+
+  //address
 
   public async createUserAddress(
     userAddress: SaveUserAdress,
@@ -78,10 +103,5 @@ export class UsersRepository {
     } catch (error) {
       throw new Error(error);
     }
-  }
-
-  public async findUser(username: string) {
-    const user = await this.userRepo.findOne({ where: { username } });
-    return user;
   }
 }
