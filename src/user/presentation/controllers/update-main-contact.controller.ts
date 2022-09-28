@@ -5,7 +5,7 @@ import { UpdateMainContactService } from 'src/user/usecases/update-main-contact.
 export class UpdateMainContactController {
   constructor(private updateMainContactService: UpdateMainContactService) {}
 
-  @Patch('/contacts/:contact_id/user/:user_id/')
+  @Patch('/:user_id/contact/:contact_id/')
   updateMainContact(
     @Param('user_id') user: string,
     @Param('contact_id') contact: string,
