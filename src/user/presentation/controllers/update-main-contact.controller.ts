@@ -1,4 +1,5 @@
 import { Controller, Param, Patch } from '@nestjs/common';
+import { UserContactEntity } from 'src/user/entities/user-contact.entity';
 import { UpdateMainContactService } from 'src/user/usecases/update-main-contact.usecase';
 
 @Controller('user')
@@ -9,7 +10,7 @@ export class UpdateMainContactController {
   updateMainContact(
     @Param('user_id') user: string,
     @Param('contact_id') contact: string,
-  ) {
+  ): Promise<UserContactEntity[]> {
     return this.updateMainContactService.updateMainContact(user, contact);
   }
 }
