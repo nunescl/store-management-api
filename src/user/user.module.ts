@@ -17,6 +17,8 @@ import { GetUserAddressController } from './presentation/controllers/get-user-ad
 import { GetUserAddressService } from './usecases/get-user-address.usecase';
 import { UpdateMainContactController } from './presentation/controllers/update-main-contact.controller';
 import { UpdateMainContactService } from './usecases/update-main-contact.usecase';
+import { updateMainAddressController } from './presentation/controllers/update-main-address.controller';
+import { UpdateMainAddressService } from './usecases/update-main-address.usecase';
 
 @Module({
   imports: [
@@ -37,6 +39,7 @@ import { UpdateMainContactService } from './usecases/update-main-contact.usecase
     GetUserContactsController,
     GetUserAddressController,
     UpdateMainContactController,
+    updateMainAddressController,
   ],
   providers: [
     CreateUserService,
@@ -46,6 +49,7 @@ import { UpdateMainContactService } from './usecases/update-main-contact.usecase
     GetUserContactsService,
     GetUserAddressService,
     UpdateMainContactService,
+    UpdateMainAddressService,
     UsersRepository,
   ],
 })
