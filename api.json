@@ -1,0 +1,130 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/user/signup": {
+      "post": {
+        "operationId": "CreateUserController_createUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateUserDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } }
+      }
+    },
+    "/user/signin": {
+      "post": {
+        "operationId": "SigninUserController_createUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AuthCredentialsDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } }
+      }
+    },
+    "/user/createcontact": {
+      "post": {
+        "operationId": "CreateUserContactController_createUserContact",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateUserContactDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } }
+      }
+    },
+    "/user/createaddress": {
+      "post": {
+        "operationId": "CreateUserAddressController_createUserAddress",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateUserAddressDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } }
+      }
+    },
+    "/user/contacts/{user_id}": {
+      "get": {
+        "operationId": "GetUserContactsController_getUserContacts",
+        "parameters": [],
+        "responses": { "200": { "description": "" } }
+      }
+    },
+    "/user/address/{user_id}": {
+      "get": {
+        "operationId": "GetUserAddressController_getUserAddress",
+        "parameters": [],
+        "responses": { "200": { "description": "" } }
+      }
+    },
+    "/user/{user_id}/contact/{contact_id}": {
+      "patch": {
+        "operationId": "UpdateMainContactController_updateMainContact",
+        "parameters": [
+          {
+            "name": "user_id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "contact_id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "" } }
+      }
+    },
+    "/user/{user_id}/address/{address_id}": {
+      "patch": {
+        "operationId": "updateMainAddressController_updateMainAddress",
+        "parameters": [
+          {
+            "name": "user_id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "address_id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "" } }
+      }
+    }
+  },
+  "info": { "title": "", "description": "", "version": "", "contact": {} },
+  "tags": [{ "name": "", "description": "" }],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CreateUserDto": { "type": "object", "properties": {} },
+      "AuthCredentialsDto": { "type": "object", "properties": {} },
+      "CreateUserContactDto": { "type": "object", "properties": {} },
+      "CreateUserAddressDto": { "type": "object", "properties": {} }
+    }
+  }
+}
