@@ -7,7 +7,7 @@ export class CreateUserAddressService {
   constructor(private userRepository: UsersRepository) {}
 
   async createUserAddress(
-    reateUserAddressDto: CreateUserAddressDto,
+    createUserAddressDto: CreateUserAddressDto,
   ): Promise<void> {
     const {
       state,
@@ -17,7 +17,7 @@ export class CreateUserAddressService {
       build_number,
       is_main,
       user_id,
-    } = reateUserAddressDto;
+    } = createUserAddressDto;
     try {
       await this.userRepository.createUserAddress({
         state,
@@ -28,6 +28,8 @@ export class CreateUserAddressService {
         is_main: !!is_main,
         user_id,
       });
-    } catch (error) {}
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }

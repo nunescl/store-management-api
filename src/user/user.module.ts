@@ -11,6 +11,14 @@ import { CreateUserContactService } from './usecases/create-user-contact.usecase
 import { CreateUserContactController } from './presentation/controllers/create-user-contact.controller';
 import { CreateUserAddressController } from './presentation/controllers/create-user-address.controller';
 import { CreateUserAddressService } from './usecases/create-user-address.usecase';
+import { GetUserContactsController } from './presentation/controllers/get-user-contacts.controller';
+import { GetUserContactsService } from './usecases/get-user-contacts.usecase';
+import { GetUserAddressController } from './presentation/controllers/get-user-address.controller';
+import { GetUserAddressService } from './usecases/get-user-address.usecase';
+import { UpdateMainContactController } from './presentation/controllers/update-main-contact.controller';
+import { UpdateMainContactService } from './usecases/update-main-contact.usecase';
+import { updateMainAddressController } from './presentation/controllers/update-main-address.controller';
+import { UpdateMainAddressService } from './usecases/update-main-address.usecase';
 
 @Module({
   imports: [
@@ -28,12 +36,20 @@ import { CreateUserAddressService } from './usecases/create-user-address.usecase
     SigninUserController,
     CreateUserContactController,
     CreateUserAddressController,
+    GetUserContactsController,
+    GetUserAddressController,
+    UpdateMainContactController,
+    updateMainAddressController,
   ],
   providers: [
     CreateUserService,
     SigninUserService,
     CreateUserContactService,
     CreateUserAddressService,
+    GetUserContactsService,
+    GetUserAddressService,
+    UpdateMainContactService,
+    UpdateMainAddressService,
     UsersRepository,
   ],
 })

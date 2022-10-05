@@ -25,6 +25,13 @@ export class UsersRepository {
     await this.userRepo.save(user);
   }
 
+  public async findUser(username: string): Promise<UserEntity> {
+    const user = await this.userRepo.findOne({ where: { username } });
+    return user;
+  }
+
+  //contacts
+
   public async createUserContact(
     userContact: SaveUserContact,
   ): Promise<SaveUserContact> {
@@ -40,6 +47,41 @@ export class UsersRepository {
     return userContact;
   }
 
+  public async findUserContacts(
+    user: Partial<UserEntity>,
+  ): Promise<UserContactEntity[]> {
+    const query = this.contactRepo.createQueryBuilder('contacts');
+    query.where({ user });
+
+    try {
+      const contacts = await query.getMany();
+      return contacts;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  public async updateMainContact(
+    userId: string,
+    contact: string,
+  ): Promise<UserContactEntity[]> {
+    const allUserContacts = await this.findUserContacts({
+      id: userId,
+    });
+    const promises = allUserContacts.map(async (userContact) => {
+      userContact.is_main = false;
+      if (userContact.id === contact) {
+        userContact.is_main = true;
+      }
+      return this.contactRepo.update(userContact.id, userContact);
+    });
+
+    await Promise.all(promises);
+    return allUserContacts;
+  }
+
+  //address
+
   public async createUserAddress(
     userAddress: SaveUserAdress,
   ): Promise<SaveUserAdress> {
@@ -54,8 +96,33 @@ export class UsersRepository {
     return userAddress;
   }
 
-  public async findUser(username: string) {
-    const user = await this.userRepo.findOne({ where: { username } });
-    return user;
+  public async findUserAddress(
+    user: Partial<UserEntity>,
+  ): Promise<UserAddressEntity[]> {
+    const query = this.addressRepo.createQueryBuilder('address');
+    query.where({ user });
+
+    try {
+      const address = await query.getMany();
+      return address;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  public async updateMainAddress(
+    userId: string,
+    address: string,
+  ): Promise<UserAddressEntity[]> {
+    const allUserAddress = await this.findUserAddress({ id: userId });
+    const promises = allUserAddress.map(async (userAddress) => {
+      userAddress.is_main = false;
+      if (userAddress.id === address) {
+        userAddress.is_main = true;
+      }
+      return this.addressRepo.update(userAddress.id, userAddress);
+    });
+    await Promise.all(promises);
+    return allUserAddress;
   }
 }

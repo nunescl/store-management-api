@@ -20,7 +20,7 @@ export class CreateUserService {
         address,
       });
     } catch (error) {
-      throw new Error();
+      throw new Error(error);
     }
   }
 }
