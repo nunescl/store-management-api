@@ -1,8 +1,10 @@
-import { Controller, Param, Patch } from '@nestjs/common';
+import { Controller, Param, Patch, UseGuards } from '@nestjs/common';
 import { UserAddressEntity } from 'src/user/entities/user-address.entity';
+import { JwtWsAuthGuard } from 'src/user/infra/jwt-ws-auth.guard';
 import { UpdateMainAddressService } from 'src/user/usecases/update-main-address.usecase';
 
 @Controller('user')
+@UseGuards(JwtWsAuthGuard)
 export class updateMainAddressController {
   constructor(private updateMainAddressService: UpdateMainAddressService) {}
 
