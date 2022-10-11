@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { JwtWsAuthGuard } from 'src/user/infra/jwt-ws-auth.guard';
 import { CreateUserContactService } from 'src/user/usecases/create-user-contact.usecase';
 import { CreateUserContactDto } from '../dtos/create-user-contact.dto';
