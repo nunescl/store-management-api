@@ -9,3 +9,9 @@ export type SaveProductVariation = {
   quatity: number;
   product_id: string;
 };
+
+export type SaveProductPrices = {
+  id: string;
+  retail?: number;
+  wholesale?: number;
+};

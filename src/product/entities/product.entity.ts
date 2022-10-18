@@ -19,13 +19,9 @@ export class ProductEntity {
   @Column()
   description: string;
 
-  @OneToMany(
-    () => ProductVariationEntity,
-    (variation) => variation.product.id,
-    {},
-  )
+  @OneToMany(() => ProductVariationEntity, (variation) => variation.product.id)
   variations: ProductVariationEntity[];
 
-  @OneToOne(() => ProductPriceEntity, (price) => price.product.id)
-  prices: ProductPriceEntity[];
+  @OneToOne(() => ProductPriceEntity)
+  prices: ProductPriceEntity;
 }
