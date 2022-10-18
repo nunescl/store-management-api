@@ -3,22 +3,22 @@ import {
   Entity,
   JoinColumn,
   OneToOne,
-  PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { ProductEntity } from './product.entity';
 
 @Entity()
 export class ProductPriceEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column()
-  wholesale: number;
+  wholesale?: number;
 
   @Column()
-  retail: number;
+  retail?: number;
 
-  @OneToOne(() => ProductEntity, (product) => product.id)
+  @OneToOne(() => ProductEntity)
+  @JoinColumn({ name: 'productId' })
   product: ProductEntity;
 }
